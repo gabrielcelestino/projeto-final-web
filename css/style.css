@@ -1,0 +1,30 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    
+}
+
+.myH1 {
+    color: #36659a;
+    font-weight: 700;
+}
+
+p {
+    font-weight: 600;
+}
+
+.space {
+    letter-spacing: 0.5em;
+}
+
+/* ================ SESSAO PLAYGROUND =======================
+
+/* LISTA -> Remove a borda azul do item ativo */
+.list-group-item.active {
+    border-color: #343a40 !important; /* Cor dark do Bootstrap */
+    background-color: #212529 !important; /* Cor de fundo opcional */
+}
+
+/* LISTA -> Muda a cor de todas as outras bordas da lista */
+.list-group-item {
+    border-color: #444 !important; /* Um cinza que combine com o seu bg-dark */
+}
