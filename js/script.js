@@ -64,8 +64,10 @@ const textCard = document.getElementById('favColorText');
 const profileImgCard = document.getElementById('profileImg'); 
 
 
+// ================ | VARIAVEIS RESET BTN + COUNTER VIEWS | ====================
 
-
+const btnReset = document.getElementById('btnReset');
+const counterDisplay = document.getElementById('counterDisplay');
 
 
 // ================ | CHANGE BACKGROUND COLOR | =======================
@@ -326,15 +328,29 @@ btnAPI.addEventListener('click', function() {
 
 // ================ | RESET AND COUNTER SECTION | ====================
 
-const btnReset = document.getElementById('btnReset');
-const counterDisplay = document.getElementById('counterDisplay');
-
-let counter = 0;
 
 btnReset.addEventListener('click', function() {    
     // Este comando recarrega a página atual da mesma forma que o F5
     location.reload();
 });
+
+// COUNTER COM LOCAL STORAGE
+//  var para o (localStorage), caso nao exista nada lá, começa com 0
+
+let views = localStorage.getItem('counterViews') || 0;
+
+// Add +1 cada vez que a page é carregada.
+views = Number(views) + 1;
+
+// Salva o novo valor no localStorage com o setItem, coloca a key 'counterViews' 
+// e o valor atualizado da variável views
+localStorage.setItem('counterViews', views);
+
+// Busca o elemento do HTML com o getElementById e mostra o valor atualizado.
+document.getElementById('counterViews').innerText = views;
+
+
+
 
 
 
