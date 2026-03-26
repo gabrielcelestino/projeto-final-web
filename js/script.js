@@ -323,3 +323,19 @@ btnAPI.addEventListener('click', function() {
         });
 });
 
+
+// ================ | RESET AND COUNTER SECTION | ====================
+
+const btnReset = document.getElementById('btnReset');
+const counterDisplay = document.getElementById('counterDisplay');
+
+let counter = 0;
+
+btnReset.addEventListener('click', function() {    
+    // Este comando recarrega a página atual da mesma forma que o F5
+    location.reload();
+});
+
+
+
+
