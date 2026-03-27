@@ -42,6 +42,7 @@ const heroImg = document.getAnimations('newProfileImg');
 // ================ | VARIAVEIS FORM | ====================
 
 // da parte do FORM
+const profileForm = document.getElementById('profileForm');
 const profileName = document.getElementById("profileName");
 const profileTextArea = document.getElementById('profileTextArea');
 const favColorValue = document.getElementById('favColor');
@@ -325,14 +326,14 @@ btnAPI.addEventListener('click', function() {
     // Sorteamos um ID entre 1 e 731
     const idAleatorio = Math.floor(Math.random() * 731) + 1;
 
-    // 2. Faz a chamada para a API
+    // Chamada para a API
     fetch(`https://akabab.github.io/superhero-api/api/id/${idAleatorio}.json`)
         .then(response => response.json())
         .then(heroi => {
-            // 3. Torna o card visível
+            // Exibe o cardl
             heroCardAPI.style.display = 'block';
 
-            // 4. Preenche a imagem e o nome
+            // Preenche a imagem e o nome
             heroImgAPI.src = heroi.images.md;
             heroNameAPI.innerText = heroi.name;
 
@@ -351,10 +352,61 @@ btnAPI.addEventListener('click', function() {
 
 // ================ | RESET AND COUNTER SECTION | ====================
 
-
+/*
 btnReset.addEventListener('click', function() {    
     // Este comando recarrega a página atual da mesma forma que o F5 no Windows
-    location.reload();
+    // location.reload(); --> forma mais simples mas não permitida no projeto
+});
+*/
+
+btnReset.addEventListener('click', function() {
+    console.log('Inicio Reset')
+    // Section API reset 
+    heroCardAPI.style.display = 'none';
+    heroNameAPI.innerText = '';
+    heroImgAPI.src = '';
+    quoteAPI.innerText = '';
+    console.log('API reset completed!');
+
+    // Resetar img do card do cão para o valor original
+    document.getElementById('cardImg').src = 'img/dog-working-ed.png';
+
+    // Resetar o texto do card 
+    document.getElementById('cardText').innerText = 'I really love to work! As you can see I work hard!';
+    
+    // Resetar a lista de hobbies -> é necessário repor o HTML inicial -
+    // usa crase no inicio e no fim para multiplas linhas de html
+    document.getElementById('hobbyList').innerHTML = `
+        <li class="list-group-item active bg-dark fw-bold">Meus hobbies</li>
+        <li class="list-group-item">Programar</li>
+        <li class="list-group-item">Estar junto do mar</li>
+        <li class="list-group-item">Videogames</li>
+        <li class="list-group-item">Leitura</li>
+        <li class="list-group-item">Assistir filmes e séries</li>
+        <li class="list-group-item">Estudar e aprender coisas novas</li>
+    `;
+
+    // Section Form -> limpa dados inseridos pelo utilizador    
+    profileForm.reset();
+
+    // Hero Card Reset
+    document.getElementById('profileImg').src = 'img/gc-hero2-ed.png';
+    document.getElementById('heroName').innerText = 'Son of Light';
+    document.getElementById('profileText').innerText = 'O punho elétrico da justiça faz a luz brilhar sobre as trevas.';
+    document.getElementById('favColorText').innerText = 'Sua cor favorita é branco.';    
+    document.getElementById('s02').style.backgroundColor = '';
+    // devolve classe bootstrap da section s02 -> sem isso a section ficava branca
+    s02Bg.className = 'container-fluid py-4 bg-primary-subtle';
+    document.getElementById('heroCard').style.backgroundColor = '';
+    
+  
+    // Section Counter
+    // LocalStorage - remover a key para impedir o refresh
+    localStorage.removeItem('counterSubmissions');
+    
+    // Alterar o texto no HTML para '0' no contador de submissao do perfil e no contador de acesso geral a page
+    document.getElementById('counterHero').innerText = '0';
+    document.getElementById('counterViews').innerText = '0';   
 });
 
 
