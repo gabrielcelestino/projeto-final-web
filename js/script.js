@@ -262,7 +262,7 @@ profileForm.addEventListener('submit', function (event){
     // Criar uma URL temporária para esse ficheiro
     const imageUrl = URL.createObjectURL(file);
     
-    // 4. Mudamos o src da imagem no card
+    // Mudar src da imagem no card
     profileImgCard.src = imageUrl;
 }
 });
@@ -288,6 +288,29 @@ function getLuminance(hex) {
     // Fórmula de luminosidade percebida
     return (r * 0.299 + g * 0.587 + b * 0.114);
 }
+
+// -------------- | CONTADOR DE ATUALIZAÇÕES DO PERFIL | -----------------------------
+
+// Ao carregar a página, busca o valor atual das submissoes do formulario do perfil
+let savedSubmissions = localStorage.getItem('counterSubmissions') || 0;
+
+// Exibe o valor 
+document.getElementById('counterHero').innerText = savedSubmissions;
+
+
+// Contador
+profileForm.addEventListener('submit', function(event) {
+    
+    event.preventDefault();
+
+    // Contador com localStorage 
+    let heroUpdates = localStorage.getItem('counterSubmissions') || 0;
+    heroUpdates = Number(heroUpdates) + 1;
+    localStorage.setItem('counterSubmissions', heroUpdates);
+
+    // Exibe o valor atual de atualizações do perfil (submissões do form Hero Profile)
+    document.getElementById('counterHero').innerText = heroUpdates;    
+});
 
 
 // ================ | API SECTION | ====================
@@ -330,13 +353,14 @@ btnAPI.addEventListener('click', function() {
 
 
 btnReset.addEventListener('click', function() {    
-    // Este comando recarrega a página atual da mesma forma que o F5
+    // Este comando recarrega a página atual da mesma forma que o F5 no Windows
     location.reload();
 });
 
-// COUNTER COM LOCAL STORAGE
-//  var para o (localStorage), caso nao exista nada lá, começa com 0
 
+// COUNTER COM LOCAL STORAGE PARA VER O NÚMERO DE ACESSOS DA PÁGINA
+
+//  var para o (localStorage), caso nao exista nada lá, começa com 0
 let views = localStorage.getItem('counterViews') || 0;
 
 // Add +1 cada vez que a page é carregada.
@@ -348,10 +372,3 @@ localStorage.setItem('counterViews', views);
 
 // Busca o elemento do HTML com o getElementById e mostra o valor atualizado.
 document.getElementById('counterViews').innerText = views;
-
-
-
-
-
-
-
